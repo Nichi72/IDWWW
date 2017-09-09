@@ -13,7 +13,7 @@ namespace Pakage01
         public static int Total = 1000;
 
         public int name_number;
-        public int incidence;// 방해물 출현률 방해물 출현률은 0 ~ 1 까지 이며  0.6을 작성하면 60퍼센트로 출현 함 
+        public int incidence;// 
         public int power;
 
 

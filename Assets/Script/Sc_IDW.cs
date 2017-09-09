@@ -9,7 +9,9 @@ public class Sc_IDW : MonoBehaviour {
     public Action action = Action.idle;
     private Animator animator;
     public  GameObject IDWobj;
-    
+    public AudioClip[] onGround;
+    public AudioClip[] onBeat;
+    public AudioClip[] onStart;
     
     // Use this for initialization
     void Start () {
@@ -82,7 +84,13 @@ public class Sc_IDW : MonoBehaviour {
                 IDWobj.GetComponent<Rigidbody>().AddForce(-0, -700, 0);
                 Debug.Log("Iron_Uroboros 호출은 됨");
                 break;
-            
+
+
+
+            case "Plane":
+                SoundManager._instence.PlaySE(onGround[Random.Range(0,2)]);
+                Debug.Log("Plane 호출은 됨");
+                break;
         }
     }
 

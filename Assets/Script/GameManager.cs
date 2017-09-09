@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour {
         return string.Format("현재 생성된 오브젝트 이름  :: {0} //  랜덤 값은   :: {1}  //  createVec.x( 생성될 위치 )  :: {2} // IDWNowVec.x( IDW 위치 ) :: {3} ", monsterPool[monsterRand].name , monsterRand , createVec.x , IDWNowVec.x);
     }
 
+    //Obstructions의 IEnumerator PushObjectPool()로 생성됨  
     IEnumerator CreateMonster()
     {
         //게임 종료 시까지 무한 루프
@@ -171,7 +172,7 @@ public class GameManager : MonoBehaviour {
                 }
 
                 int result = (rand + randomCreate()) ; // ex ) 0 + 5 , 8 +5  .16 +5
-                Debug.Log("rand  : " +rand+ "// randomCreate() "+ randomCreate() + "   // result  " + result);
+                //Debug.Log("rand  : " +rand+ "// randomCreate() "+ randomCreate() + "   // result  " + result);
                 if (!monsterPool[result].activeSelf) // 안켜진거 
                 {
                     monsterPool[result].transform.position = createVec;
@@ -205,6 +206,8 @@ public class GameManager : MonoBehaviour {
             int objAllcount = GameBalancer.Girls_status.Length + GameBalancer.Iron_status.Length; // 2개의 배열의 크기 합치기 //현재 8
             int A =0;
             int B = 0;
+
+
             // 철혈과 인형 스테이터스 배열을 합치는 작업 
             int result = 0; ;
             Obstruction_Status[] temp = new Obstruction_Status[objAllcount];                                                                // 만약 인형이 7개 철혈이 5개라면? 
@@ -222,8 +225,6 @@ public class GameManager : MonoBehaviour {
                     
                     temp[i] = GameBalancer.Iron_status[tempInt];//GameBalancer.Iron_status[i - GameBalancer.Iron_status.Length + 2]; // 5 - 3+2 
                 }
-
-
                 //Debug.Log(" GameBalancer.Girls_status.Length "+GameBalancer.Girls_status.Length);
                 //Debug.Log(" i : "+ i +" 배열의 숫자는 "+ temp[i].name_number);
             }
@@ -248,6 +249,7 @@ public class GameManager : MonoBehaviour {
 
 
         }
+        // 총합이 같지 않을 떄 호출됨 
         else
         {
             Debug.Break();

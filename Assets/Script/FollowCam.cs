@@ -13,20 +13,18 @@ public class FollowCam : MonoBehaviour
     Vector3 distanceDifferenceTraffic;  // 이전 프레임과 현재의 프레임의 차이량을 구하기 위해 필요한 변수 
     Vector3 temp;              // temp가 이전 프레임을 담는 변수임 
     //카메라 자신의 Transform 변수
-    private Transform cameratr;
+    public Transform cameratr;
     public Camera _camera;
+    float clampY; // IDW 의 Y축에 비례해서 Size값이 증감한다. 이 변수는 clamp로 제한받아 최소값가 최대값이 존재한다. 
+    
     void Start()
     {
         differencePower = 0.5f;
-        //카메라 자신의 Transform 컴포넌트를 tr에 할당
-        cameratr = GetComponent<Transform>();
-        //distanceDifference = GetComponent<Transform>();
-        //temp = GetComponent<Transform>();
-        _camera = GetComponent<Camera>();
+        //_camera = GetComponent<Camera>();
         temp = IDWtr.position;
         distanceDifferenceTraffic = IDWtr.position; // 초기화 
         StartCoroutine(CameraSize());
-        //Mathf.Clamp(cameratr.position.z, -15, 100);
+        
         //StartCoroutine(clampTest()); // 테스트 코루틴 
         //GetComponent<Rigidbody>().
     }
@@ -54,7 +52,7 @@ public class FollowCam : MonoBehaviour
         //    (int)(distanceDifferenceTraffic.y / distanceDifferenceTraffic.y));
         if (distanceDifferenceTraffic.y == 0)
         {
-            return 0;
+            return 1;
         }
         else
         return (int)(distanceDifferenceTraffic.y / distanceDifferenceTraffic.y);
@@ -81,16 +79,31 @@ public class FollowCam : MonoBehaviour
 
     //}
 
-    IEnumerator CameraSize()
+    public IEnumerator CameraSize() // IDW 의 Y축에 비례하며 카메라 SIze값이 증감한다.
     {
         while (true)
         {
-
-            cameratr.position = new Vector3(IDWtr.position.x + 5, IDWtr.position.y + 4.5f, IDWtr.position.y - 20f);
+            cameratr.position = new Vector3(IDWtr.position.x + 5, IDWtr.position.y + 6.5f, IDWtr.position.z -20f);
+            clampY = (IDWtr.transform.position.y * DifferenceTraffic());
+            _camera.orthographicSize = Mathf.Clamp(clampY, 4.5f, 20f);
             yield return null;
         }
+    }
 
 
+
+
+    float myclamp(float value , float min , float max) // clamp 내가 만들었는데 안씀 ㅋㅋ
+    {
+        if (min > value) // 4 > 0 -> 4 > 4 
+        {
+            value = min;
+        }
+        if ( max < value ) // 100 < 120 -> 100 < 100 
+        {
+            value = max;
+        }
+        return value;
     }
 
 

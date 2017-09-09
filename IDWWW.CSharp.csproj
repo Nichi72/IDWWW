@@ -85,10 +85,10 @@
     <Compile Include="Assets\Script\Sc_Kicker.cs" />
     <Compile Include="Assets\Script\Sc_Skill.cs" />
     <Compile Include="Assets\Script\sc_spriteChanger.cs" />
+    <Compile Include="Assets\Script\Status.cs" />
     <Compile Include="Assets\Test\BGMStarter.cs" />
     <Compile Include="Assets\Test\ButtonManager.cs" />
     <Compile Include="Assets\Test\SoundManager.cs" />
-    <Compile Include="Assets\Test\Status.cs" />
     <Compile Include="Assets\Test\UVScroller.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
